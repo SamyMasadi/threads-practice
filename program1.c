@@ -177,7 +177,7 @@ int main()
 
     // stop search clock
     clock_t end_search = clock();
-    double search_time = (double)(end_search = start_search) / CLOCKS_PER_SEC;
+    double search_time = ((double)(end_search - start_search)) / CLOCKS_PER_SEC;
 
     // print out local details, global details, and elapsed times
     for (int i = 0; i < num_threads; ++i)
@@ -191,7 +191,7 @@ int main()
 
     // stop program clock
     clock_t end_time = clock();
-    double time_used = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    double time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
     
     printf("Search time: %f seconds\n", search_time);
     printf("Program time: %f seconds\n", time_used);
