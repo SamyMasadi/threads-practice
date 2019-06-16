@@ -17,6 +17,7 @@
 #include <sys/types.h>
 #include <pthread.h>
 #include <time.h>
+#include <sys/time.h>
 
 #define ARR_LEN 100000000
 
@@ -115,13 +116,17 @@ int main()
     // seed is pid
     randSeed = getpid();
 
+    // for timekeeping
+    struct timeval  tv;
+
     // user can decide number of threads
     int num_threads;
     printf("Enter number of threads: ");
     num_threads = getchar();
 
     // start program clock after user input
-    clock_t start_time = clock();
+    gettimeofday(&tv, NULL);
+    double start_time = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
 
     // just a space for readability
     printf("\n");
@@ -160,7 +165,8 @@ int main()
     largest = arr[0];
 
     // start search clock
-    clock_t start_search = clock();
+    gettimeofday(&tv, NULL);
+    double start_search = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
 
     // start the threads
     for (int i = 0; i < num_threads; ++i)
@@ -176,8 +182,9 @@ int main()
     }
 
     // stop search clock
-    clock_t end_search = clock();
-    double search_time = ((double)(end_search - start_search)) / CLOCKS_PER_SEC;
+    gettimeofday(&tv, NULL);
+    double end_search = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
+    double search_time = end_search - start_search;
 
     // print out local details, global details, and elapsed times
     for (int i = 0; i < num_threads; ++i)
@@ -190,11 +197,12 @@ int main()
     printf("Global max: %d\n\n", largest);
 
     // stop program clock
-    clock_t end_time = clock();
-    double time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+    gettimeofday(&tv, NULL);
+    double end_time = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
+    double time_used = end_time - start_time;
     
-    printf("Search time: %f seconds\n", search_time);
-    printf("Program time: %f seconds\n", time_used);
+    printf("Search time: %5.1f milliseconds\n", search_time);
+    printf("Program time: %5.1f milliseconds\n", time_used);
 
 }
 	
