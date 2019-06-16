@@ -123,6 +123,9 @@ int main()
     int num_threads;
     printf("Enter number of threads: ");
     num_threads = getchar();
+    
+    // flush input buffer
+    while ((getchar()) != '\n');
 
     // start program clock after user input
     gettimeofday(&tv, NULL);
@@ -203,6 +206,9 @@ int main()
     
     printf("Search time: %5.1f milliseconds\n", search_time);
     printf("Program time: %5.1f milliseconds\n", time_used);
+
+    printf("\nEnter any key to exit. ");
+    getchar();
 
 }
 	
