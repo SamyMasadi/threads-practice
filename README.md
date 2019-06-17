@@ -21,4 +21,4 @@ gcc program1.c -o program1 -pthread
 On Windows, you may need to install [Cygwin](https://www.cygwin.com/) to compile the source code.
 
 ## Author
-Samy Masadi
+Samy Masadi - https://github.com/SamyMasadi
